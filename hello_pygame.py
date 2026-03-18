@@ -15,7 +15,7 @@ running = True
 
 # 원 위치와 속도
 x, y = 400, 300
-speed = 10  # 이동 속도
+speed = 10  # 기본 이동 속도
 radius = 50  # 원 반지름
 
 while running:
@@ -25,14 +25,18 @@ while running:
 
     # 키 입력 처리
     keys = pygame.key.get_pressed()
+    
+    # Shift 키 누르면 속도 2배
+    current_speed = speed * 2 if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT] else speed
+
     if keys[pygame.K_LEFT]:
-        x -= speed
+        x -= current_speed
     if keys[pygame.K_RIGHT]:
-        x += speed
+        x += current_speed
     if keys[pygame.K_UP]:
-        y -= speed
+        y -= current_speed
     if keys[pygame.K_DOWN]:
-        y += speed
+        y += current_speed
 
     # 화면 밖으로 나가지 않도록 제한
     x = max(radius, min(screen_width - radius, x))
